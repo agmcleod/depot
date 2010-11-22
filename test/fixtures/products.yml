@@ -1,13 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  title: MyString
-  description: MyText
-  image_url: MyString
-  price: 9.99
+ruby:
+  title: Programming Ruby 1.9
+  description: Description text about ruby 1.9 book
+  image_url: ruby.png
+  price: 45.99
 
-two:
-  title: MyString
-  description: MyText
-  image_url: MyString
-  price: 9.99
+rails:
+  title: Agile web development with rails
+  description: 
+    Ruby on rails is a great framework for agile development. This book walks you through how to use rails
+    and work on an agile project with it
+  image_url: myimage.jpg
+  price: 35.50
