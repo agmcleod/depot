@@ -44,7 +44,18 @@ class CartsControllerTest < ActionController::TestCase
       session[:cart_id] = @cart.id
       delete :destroy, :id => @cart.to_param
     end
-
+    assert_select 'div#cart_container' do
+      !assert_select 'table'
+    end
     assert_redirected_to carts_path
+  end
+  
+  test "should destroy cart remote" do
+    assert_difference('Cart.count', -1) do
+      session[:cart_id] = @cart.id
+      xhr :delete, :destroy, :id => @cart.to_param
+    end
+    assert_response :success
+    assert_select_rjs :replace_html, 'cart_container'
   end
 end

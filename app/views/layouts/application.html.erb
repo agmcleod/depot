@@ -13,14 +13,23 @@
     <%= @page_title || "Pragmatic Bookshelf" %>
   </div>
   <div id="columns">
-    <nav id="side">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="">Questions</a></li>
-        <li><a href="">News</a></li>
-        <li><a href="">Contact</a></li>
-      </ul>
-    </nav>
+    <aside id="side">
+      <div id="cart_container" class="cart_container">
+        <% if @cart %>
+          <%= hidden_div_if @cart.line_items.empty?, :id => 'cart' do %>
+            <%= render @cart %>
+          <% end %>
+        <% end %>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="">Questions</a></li>
+          <li><a href="">News</a></li>
+          <li><a href="">Contact</a></li>
+        </ul>
+      </nav>
+    </aside>
     <div id="main">
       <%= yield %>
     </div>

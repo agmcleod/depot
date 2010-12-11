@@ -13,3 +13,10 @@ rails:
     and work on an agile project with it
   image_url: myimage.jpg
   price: 35.50
+  
+web:
+  title: Advanced Web Development
+  description:
+    The leading book in HTML5 and CSS3 development
+  image_url: web.jpg
+  price: 28.99

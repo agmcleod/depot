@@ -22,7 +22,7 @@ class CombineItemsInCart < ActiveRecord::Migration
       # add individual items
       lineitem.quantity.times do
         LineItem.create :cart_id => lineitem.cart_id,
-          :product => lineitem.product_id, :quantity => 1
+          :product_id => lineitem.product_id, :quantity => 1
       end
       
       # remove original item

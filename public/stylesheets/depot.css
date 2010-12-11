@@ -167,7 +167,7 @@ body {
   display: inline;
 }
 
-#store .cart_title {
+#store #cart_title {
   font: 120% bold;
 }
 
@@ -178,4 +178,16 @@ body {
 #store .total_line .total_cell {
   font-weight:bold;
   border-top: 1px solid #595;
+}
+
+.cart_container, .cart_container table {
+  font-size:smaller;
+  color:#fff;
+}
+
+.cart_container table {
+  border-top:1px dotted #595;
+  border-bottom:1px dotted #595;
+  margin-bottom:10px;
+  width:208px;
 }
