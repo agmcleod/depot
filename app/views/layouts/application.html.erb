@@ -16,7 +16,7 @@
     <aside id="side">
       <div id="cart_container" class="cart_container">
         <% if @cart %>
-          <%= hidden_div_if @cart.line_items.empty?, :id => 'cart' do %>
+          <%= hidden_div_if(@cart.line_items.empty?, :id => 'cart') do %>
             <%= render @cart %>
           <% end %>
         <% end %>

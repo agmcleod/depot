@@ -44,9 +44,6 @@ class CartsControllerTest < ActionController::TestCase
       session[:cart_id] = @cart.id
       delete :destroy, :id => @cart.to_param
     end
-    assert_select 'div#cart_container' do
-      !assert_select 'table'
-    end
     assert_redirected_to carts_path
   end
   
