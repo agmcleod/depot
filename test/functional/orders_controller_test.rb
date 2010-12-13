@@ -27,7 +27,6 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should create order" do
-    
     assert_difference('Order.count') do
       post :create, :order => @order.attributes
     end
