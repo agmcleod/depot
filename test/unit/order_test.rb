@@ -5,7 +5,7 @@ class OrderTest < ActiveSupport::TestCase
   fixtures :payment_types
   
   setup do
-    @order = orders(:one)
+    @order = orders(:two)
   end
   
   test "order attributes must not be empty" do
@@ -16,10 +16,14 @@ class OrderTest < ActiveSupport::TestCase
     end
     
     # test fixture values
-    assert @order.valid?
+    File.open(File.join(Rails.root, 'out.txt'), 'w+') do |file|
+      @order.errors.to_a.each {|msg| file.write "#{msg}\n"}
+    end
+    
     assert_equal @order.payment_type_id, payment_types(:check).id
     assert_not_equal @order.name, ''
     assert_not_equal @order.address, ''
     assert_not_equal @order.email, ''
+    assert @order.valid?
   end
 end

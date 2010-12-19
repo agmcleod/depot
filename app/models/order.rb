@@ -5,8 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :payment_type
   
   validates :name, :address, :email, :presence => true
-  validates_inclusion_of :payment_type_id, :in => PaymentType.all.map { |type| type.id }, :message => "- Invalid payment type selected"
-  
+  validates_associated :payment_type
   
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
