@@ -65,9 +65,13 @@ class OrdersController < ApplicationController
   # PUT /orders/1.xml
   def update
     @order = Order.find(params[:id])
-
+    ship_date = @order.ship_date
     respond_to do |format|
       if @order.update_attributes(params[:order])
+        if @order.send_shipped_notification?(ship_date)
+          Notifier.order_ship_date_updated(@order).deliver
+          # Rails.logger.debug(ActionMailer::Base.deliveries.last)
+        end
         format.html { redirect_to(@order, :notice => 'Order was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -75,6 +79,10 @@ class OrdersController < ApplicationController
         format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
       end
     end
+  end
+  
+  def update_order
+    @order = Order.find(params[:id])
   end
 
   # DELETE /orders/1

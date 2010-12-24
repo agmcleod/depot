@@ -1,0 +1,12 @@
+<h3>Pragmatic Order Ship Date Changed</h3>
+<p>
+  This is just to let you know that we've updated the ship date of your order:
+</p>
+<p><strong><%= @order.ship_date %></strong></p>
+
+<table>
+  <tr>
+    <th colspan="2"></th><th>Description</th>
+  </tr>
+  <%= @order.line_items_out %>
+</table>

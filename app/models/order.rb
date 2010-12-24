@@ -13,4 +13,18 @@ class Order < ActiveRecord::Base
       line_items << item
     end
   end
+  
+  def send_shipped_notification?(old_date)
+    if old_date != self.ship_date
+      true
+    else
+      false
+    end
+  end
+  
+  def line_items_out
+    out = "<ul>"
+    self.line_items.each { |li| out = "#{out}<li>#{li.product.title}</li>" }
+    out = "#{out}</ul>"
+  end
 end

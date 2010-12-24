@@ -11,6 +11,8 @@ Depot::Application.routes.draw do
     get :who_bought, :on => :member
   end
   
+  match 'orders/:id/update', :to => 'orders#update_order', :via => 'get', :as => 'update_order'
+  
   root :to => 'store#index', :as => 'store'
 
   # The priority is based upon order of creation:

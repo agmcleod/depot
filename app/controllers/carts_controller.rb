@@ -13,9 +13,11 @@ class CartsController < ApplicationController
   # GET /carts/1.xml
   def show
     begin
-      @cart = Cart.find params[:id]
+      @cart = Cart.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      logger.error "Attempt to access invalid cart #{params[:id]}"
+      msg = "Attempt to access invalid cart #{params[:id]}"
+      logger.error(msg)
+      Notifier.notify_admin_of_error(msg).deliver
       redirect_to store_url, :notice => 'Invalid cart'
     else
       respond_to do |format|

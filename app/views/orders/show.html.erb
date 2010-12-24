@@ -20,6 +20,12 @@
   <%= @order.payment_type.name %>
 </p>
 
+<% unless @order.ship_date.nil? %>
+  <p>
+    <b>Ship Date:</b>
+    <%= @order.ship_date %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

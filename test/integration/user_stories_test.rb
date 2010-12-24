@@ -2,6 +2,26 @@ require 'test_helper'
 
 class UserStoriesTest < ActionDispatch::IntegrationTest
   fixtures :products, :payment_types
+  
+  test "trigger an invalid cart error" do
+    LineItem.delete_all
+    Order.delete_all
+    
+    # User goes to the index
+    get '/'
+    assert_response(:success)
+    assert_template('index')
+    
+    # tries to go directly to an invalid cart
+    get '/carts/1'
+    
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal(['sircoolguy99@gmail.com'], mail.to)
+    assert_equal('An error has occured', mail.subject)
+    
+    assert_response(302)
+    assert_template('index')
+  end
 
   test "buying a product" do
     LineItem.delete_all

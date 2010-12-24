@@ -1,0 +1,41 @@
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag 'jquery-ui-1.8.7.custom.css' %>
+  <%= javascript_include_tag 'jquery-1.4.4.min.js' %>
+  <%= javascript_include_tag 'jquery-ui-1.8.7.custom.min.js' %>
+  <script type="text/javascript" charset="utf-8">
+    $.noConflict();
+      jQuery(document).ready(function($) {
+        $('.date').each(function() {
+          $(this).datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+      });
+  </script>
+<% end %>
+<h1>Update Order Shipped date</h1>
+<ul>
+  <li><strong>Name:</strong> <%= @order.name %></li>
+  <li><strong>Address:</strong> <%= @order.address %></li>
+  <li><strong>Email:</strong> <%= @order.email %> </li>
+  <li><strong>Payment Type:</strong> <%= @order.payment_type.name %></li>
+</ul>
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :ship_date %><br />
+    <%= f.text_field :ship_date, :class => 'date' %>
+  </div>
+  <div class="field">
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>
