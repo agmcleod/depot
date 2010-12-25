@@ -6,8 +6,6 @@
 #
 check:
   name: Pay Check
-# column: value
-#
+  
 creditcard: 
   name: Credit Card
-#  column: value

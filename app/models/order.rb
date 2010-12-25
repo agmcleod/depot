@@ -1,7 +1,5 @@
 class Order < ActiveRecord::Base
   has_many :line_items, :dependent => :destroy
-  
-  # PAYMENT_TYPES = ["Check", "Credit card", "Purchase order"]
   belongs_to :payment_type
   
   validates :name, :address, :email, :presence => true
@@ -23,8 +21,8 @@ class Order < ActiveRecord::Base
   end
   
   def line_items_out
-    out = "<ul>"
-    self.line_items.each { |li| out = "#{out}<li>#{li.product.title}</li>" }
-    out = "#{out}</ul>"
+    out = "<table><tbody>"
+    self.line_items.each { |li| out = "#{out}<tr><td>#{li.quantity}&times;</td><td>#{li.product.title}</td></tr>" }
+    "#{out}</tbody></table>".html_safe
   end
 end
