@@ -5,18 +5,18 @@ ruby:
   description: Description text about ruby 1.9 book
   image_url: ruby.png
   price: 45.99
+  locale: en
 
 rails:
   title: Agile web development with rails
-  description: 
-    Ruby on rails is a great framework for agile development. This book walks you through how to use rails
-    and work on an agile project with it
+  description: Ruby on rails is a great framework for agile development. This book walks you through how to use rails and work on an agile project with it
   image_url: myimage.jpg
   price: 35.50
+  locale: en
   
 web:
   title: Advanced Web Development
-  description:
-    The leading book in HTML5 and CSS3 development
+  description: The leading book in HTML5 and CSS3 development
   image_url: web.jpg
   price: 28.99
+  locale: en

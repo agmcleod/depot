@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
   has_many :orders, :through => :line_items
   
   before_destroy :ensure_not_referenced_by_any_line_item
-
   def ensure_not_referenced_by_any_line_item
     if line_items.count.zero?
       return true
@@ -20,4 +19,5 @@ class Product < ActiveRecord::Base
     :with => %r{\.(gif|jpg|png)$}i,
     :message => 'must be a url for GIF, JPG or PNG'
   }
+  validates :locale, :inclusion => { :in => LANGUAGES.collect { |l| l[1] } }
 end

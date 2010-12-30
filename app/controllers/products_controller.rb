@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
-    @products = Product.all
+    l = current_locale || 'en'
+    @products = Product.where(:locale => l)
 
     respond_to do |format|
       format.html # index.html.erb

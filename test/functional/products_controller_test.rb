@@ -7,7 +7,8 @@ class ProductsControllerTest < ActionController::TestCase
       :title => 'Lorem Ipsum',
       :description => 'Wibbles are fun!',
       :image_url => 'book.png',
-      :price => '19.95'
+      :price => '19.95',
+      :locale => 'es'
     }
   end
 
@@ -42,7 +43,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should update product" do
     put :update, :id => @product.to_param, :product => @update
-    assert_redirected_to product_path(assigns(:product))
+    assert_redirected_to(product_path(assigns(:product)))
   end
 
   test "should destroy product" do

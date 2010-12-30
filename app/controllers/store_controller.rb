@@ -4,7 +4,8 @@ class StoreController < ApplicationController
     if params[:set_locale]
       redirect_to(store_path(:locale => params[:set_locale]))
     else
-      @products = Product.all
+      l = current_locale || 'en'
+      @products = Product.where(:locale => l)
       @cart = current_cart
     end
   end

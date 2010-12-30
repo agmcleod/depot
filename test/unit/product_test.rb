@@ -15,17 +15,16 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.new(
       :title => 'My Book Title', 
       :description => 'yyy',
-      :image_url => 'image.jpg'
+      :image_url => 'image.jpg',
+      :locale => 'en'
     )
     product.price = -1
     assert product.invalid?
-    assert_equal "must be greater than or equal to 0.01",
-      product.errors[:price].join('; ')
+    assert_equal "must be greater than or equal to 0.01", product.errors[:price].join('; ')
       
     product.price = 0
     assert product.invalid?
-    assert_equal "must be greater than or equal to 0.01",
-      product.errors[:price].join('; ')
+    assert_equal "must be greater than or equal to 0.01", product.errors[:price].join('; ')
       
     product.price = 1
     assert product.valid?  
@@ -36,12 +35,13 @@ class ProductTest < ActiveSupport::TestCase
       :title => 'My Book Title',
       :description => 'yyy',
       :price => 1,
-      :image_url => image_url
+      :image_url => image_url,
+      :locale => 'en'
     )
   end
   
   test "image url" do
-    ok = %w{ fred.gif fred.gif fred.png fred.png FRED.JPG FRED.Jpg http://a.b.c/x/y/z/fred.gif }
+    ok = %w{ fred.gif Fred.gif fred.png fred.png FRED.JPG FRED.Jpg http://a.b.c/x/y/z/fred.gif }
     bad = %w{ fred.doc fred.gif/more fred.gif.more }
     
     ok.each do |name|
@@ -58,7 +58,8 @@ class ProductTest < ActiveSupport::TestCase
       :title => products(:ruby).title,
       :description => 'yyy',
       :price => 1,
-      :image_url => 'fred.gif'
+      :image_url => 'fred.gif',
+      :locale => 'en'
     )
     
     assert !product.save
@@ -70,10 +71,20 @@ class ProductTest < ActiveSupport::TestCase
       :title => 'Short',
       :description => 'yyy',
       :price => 10,
-      :image_url => 'fake.jpg'
+      :image_url => 'fake.jpg',
+      :locale => 'en'
     )
     
     assert product.invalid?
     assert_equal "is too short (minimum is 10 characters)", product.errors[:title].join('; ')
+  end
+  
+  test "product locale must be in one of the locales" do
+    product = new_product('image.jpg')
+    
+    assert(product.valid?)
+    
+    product.locale = "lorem"
+    assert(product.invalid?)
   end
 end

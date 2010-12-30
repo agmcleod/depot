@@ -23,12 +23,21 @@ class ApplicationController < ActionController::Base
   end
   
   def set_i18n_locale_from_params
+    locale = current_locale 
+    if !locale.nil?
+      I18n.locale = locale
+    else
+      flash.now[:notice] = "#{params[:locale]} translation not available"
+      logger.error(flash.now[:notice])
+    end
+  end
+  
+  def current_locale
     if params[:locale]
       if I18n.available_locales.include?(params[:locale].to_sym)
-        I18n.locale = params[:locale]
+        params[:locale]
       else
-        flash.now[:notice] = "#{params[:locale]} translation not available"
-        logger.error(flash.now[:notice])
+        nil
       end
     end
   end

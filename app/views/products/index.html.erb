@@ -10,12 +10,12 @@
       </td>
       <td class="list_description">
         <dl>
-          <dt><%= product.title %></dt>
-          <dd><%= truncate strip_tags(product.description), :length => 80 %></dd>
+          <dt><%= product.title.html_safe %></dt>
+          <dd><%= truncate(strip_tags(product.description), :length => 80).html_safe %></dd>
         </dl>
       </td>
       <td><%= product.image_url %></td>
-      <td><%= product.price %></td>
+      <td><%= price_after_conversion(product.price) %></td>
       <td class="list_actions"><%= link_to 'Show', product %><br />
       <%= link_to 'Edit', edit_product_path(product) %><br />
       <%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
