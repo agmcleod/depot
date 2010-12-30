@@ -25,7 +25,11 @@
   </div>
   <div class="field">
     <%= f.label :payment_type_id, t('.pay_type') %>
-    <%= f.select :payment_type_id, PaymentType.all.collect{ |p| [p.name, p.id] }, :include_blank => true %>
+    <% if(current_locale == 'es') %>
+      <%= f.select :payment_type_id, PaymentType.order(:es_name).collect{ |p| [p.es_name.html_safe, p.id] }, :include_blank => true %>
+    <% else %>
+      <%= f.select :payment_type_id, PaymentType.all.collect{ |p| [p.name, p.id] }, :include_blank => true %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit t('.submit') %>
